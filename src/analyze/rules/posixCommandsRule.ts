@@ -16,47 +16,39 @@ export const posixCommandsRule: Rule = {
     let fixed = command;
     const rmRf = /\brm\s+-rf?\b/;
     if (rmRf.test(command)) {
+      const newFixed = fixed.replace(/\brm\s+-rf?\s+/g, "rimraf ");
       findings.push({
         id: "posix.rmrf",
         level: "warn",
         message: "Use rimraf instead of `rm -rf` for cross-platform deletes.",
         scriptName,
         original: command,
-        fixed: fixed.replace(/\brm\s+-rf?\s+/g, "rimraf "),
+        fixed: newFixed,
         addDevDeps: ["rimraf"],
       });
-      fixed = fixed.replace(/\brm\s+-rf?\s+/g, "rimraf ");
+      fixed = newFixed;
     }
     for (const seg of segments) {
-      const tok = firstToken(seg.text);
+      const segText = seg.text;
+      if (/^\s*(?:npx\s+)?shx\s+/i.test(segText)) continue;
+      const tok = firstToken(segText);
       if (POSIX_TO_SHX.has(tok)) {
         const shx = POSIX_TO_SHX.get(tok)!;
-        const segRegex = new RegExp(`\\b${tok}\\b`);
-        fixed = fixed.replace(segRegex, shx);
-        findings.push({
-          id: `posix.${tok}`,
-          level: "warn",
-          message: `Use ${shx} instead of raw '${tok}' for portability.`,
-          scriptName,
-          original: command,
-          fixed,
-          addDevDeps: ["shx"],
-        });
+        const segFixed = segText.replace(new RegExp(`^\\s*${tok}\\b`), shx);
+        if (segFixed !== segText) {
+          const newFixed = fixed.replace(segText, segFixed);
+          findings.push({
+            id: `posix.${tok}`,
+            level: "warn",
+            message: `Use ${shx} instead of raw '${tok}' for portability.`,
+            scriptName,
+            original: command,
+            fixed: newFixed,
+            addDevDeps: ["shx"],
+          });
+          fixed = newFixed;
+        }
       }
-    }
-    const mkdirDashP = /\bmkdir\s+-p\b/;
-    if (mkdirDashP.test(command)) {
-      const newFixed = fixed.replace(/\bmkdir\s+-p\b/g, "shx mkdir -p");
-      findings.push({
-        id: "posix.mkdirp",
-        level: "warn",
-        message: "Use `shx mkdir -p` for portable directory creation.",
-        scriptName,
-        original: command,
-        fixed: newFixed,
-        addDevDeps: ["shx"],
-      });
-      fixed = newFixed;
     }
     if (fixed !== command && !findings.find((f) => f.id === "posix._summary")) {
       findings.push({
@@ -69,5 +61,5 @@ export const posixCommandsRule: Rule = {
       });
     }
     return findings;
-  },
+  }
 };
