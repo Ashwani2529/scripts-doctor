@@ -1,5 +1,3 @@
-Got it 👍 — here’s the **entire README rewritten in proper Markdown editor format**. You can copy-paste this directly into a `README.md` file:
-
 ```markdown
 # scripts-doctor
 
