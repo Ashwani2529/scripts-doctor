@@ -1,14 +1,14 @@
-Here’s a cleanly rewritten version of your README in **Markdown (md) format**, with improved structure, consistent headings, and polished formatting:
+Got it 👍 — here’s the **entire README rewritten in proper Markdown editor format**. You can copy-paste this directly into a `README.md` file:
 
 ```markdown
 # scripts-doctor
 
 Lint (and optionally auto-fix) your `package.json` **scripts** so they’re **cross-platform** and **reliable** across Windows, macOS, and Linux.
 
-- Rewrites fragile POSIX commands to portable forms (e.g. `rm -rf` → `rimraf`; `cp/mv/mkdir -p/grep/sed/cat` → `shx …`).
-- Wraps inline env-vars with `cross-env` (`FOO=bar cmd` → `cross-env FOO=bar cmd`) so they work on Windows too.
-- Flags scripts that call local tools not listed in `devDependencies`.
-- Plays nicely with `npm run` and `npx`.
+- Rewrites fragile POSIX commands to portable forms (e.g. `rm -rf` → `rimraf`; `cp/mv/mkdir -p/grep/sed/cat` → `shx …`)
+- Wraps inline env-vars with `cross-env` (`FOO=bar cmd` → `cross-env FOO=bar cmd`) so they work on Windows too
+- Flags scripts that call local tools not listed in `devDependencies`
+- Plays nicely with `npm run` and `npx`
 
 ---
 
@@ -52,17 +52,17 @@ npx scripts-doctor lint path/to/project
 
 ## 🔍 What It Checks
 
-- **POSIX deletes:** `rm -rf` → suggests `rimraf` for cross-platform deletion.
-- **POSIX commands:** `cp`, `mv`, `mkdir -p`, `grep`, `sed`, `cat` → suggests `shx` wrappers.
-- **Inline env vars:** `FOO=bar command` → suggests `cross-env`.
-- **Missing local bins:** warns when scripts call `tsc`, `eslint`, `jest`, etc. without corresponding devDeps.
-- **Chaining/subshell pitfalls:** surfaces fragile patterns (`&&`, `;`, `$(...)`) that often fail on Windows cmd.
+- **POSIX deletes:** `rm -rf` → suggests `rimraf` for cross-platform deletion
+- **POSIX commands:** `cp`, `mv`, `mkdir -p`, `grep`, `sed`, `cat` → suggests `shx` wrappers
+- **Inline env vars:** `FOO=bar command` → suggests `cross-env`
+- **Missing local bins:** warns when scripts call `tsc`, `eslint`, `jest`, etc. without corresponding devDeps
+- **Chaining/subshell pitfalls:** surfaces fragile patterns (`&&`, `;`, `$(...)`) that often fail on Windows cmd
 
 ### Auto-fixes
 
-- Rewrites `rm -rf` → `rimraf` (and suggests adding `rimraf` if missing).
-- Rewrites `cp|mv|mkdir -p|grep|sed|cat` → `shx …`.
-- Wraps inline env-vars with `cross-env`.
+- Rewrites `rm -rf` → `rimraf` (and suggests adding `rimraf` if missing)
+- Rewrites `cp|mv|mkdir -p|grep|sed|cat` → `shx …`
+- Wraps inline env-vars with `cross-env`
 
 > Some fixes require adding devDependencies.
 
@@ -168,26 +168,13 @@ Example GitHub Actions step:
 
 ## 💡 Why This Approach?
 
-- `npm run` is the standard way to execute `package.json` scripts.
-- `npx`/`npm exec` runs binaries without global installs—great for one-offs and CI.
-- `shx` (ShellJS CLI) and `rimraf` are widely used to make scripts portable.
+- `npm run` is the standard way to execute `package.json` scripts
+- `npx`/`npm exec` runs binaries without global installs—great for one-offs and CI
+- `shx` (ShellJS CLI) and `rimraf` are widely used to make scripts portable
 
 ---
 
 ## ⚠️ Limitations
 
-- Only inspects the `scripts` field of `package.json`.
-- Complex shell constructs may still need manual edits.
-
----
-
-## 📜 License
-
-MIT © You
-```
-
----
-
-This version is fully **Markdown-compliant**, with clear sections, emojis for readability, and consistent formatting.  
-
-Would you like me to also create a **shorter “quick reference” version** of this README (like a cheat sheet) for developers who just want the essentials?
+- Only inspects the `scripts` field of `package.json`
+- Complex shell constructs may still need manual edits
