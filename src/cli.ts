@@ -3,6 +3,7 @@ import { analyzeScripts } from "./analyze";
 import { readPackageJson, writePackageJson } from "./util/io";
 import { applySuggestions } from "./fix";
 import { log } from "./util/log";
+import {version} from "../package.json";
 import { detectPackageManager } from "./util/detectPackageManager";
 const program = new Command();
 program
@@ -10,7 +11,7 @@ program
   .description(
     "Lint/auto-fix package.json scripts for cross-platform portability."
   )
-  .version("0.1.0");
+  .version(version);
 program
   .command("lint")
   .option(

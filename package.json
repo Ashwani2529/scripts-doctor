@@ -2,12 +2,13 @@
   "name": "scripts-doctor",
   "version": "1.0.0",
   "description": "a development-time linter/auto-fixer for package.json scripts that nudges them to be cross-platform (Windows + Unix) and reliable.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
     "scripts-doctor": "bin/scripts-doctor.js",
     "sd":"bin/scripts-doctor.js"
   },
   "type": "commonjs",
+  "types": "dist/index.d.ts",
   "files": ["bin","dist","README.md","LICENSE"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
