@@ -1,0 +1,49 @@
+{
+  "name": "scripts-doctor",
+  "version": "1.0.0",
+  "description": "a development-time linter/auto-fixer for package.json scripts that nudges them to be cross-platform (Windows + Unix) and reliable.",
+  "main": "index.js",
+  "bin": {
+    "scripts-doctor": "bin/scripts-doctor.js",
+    "sd":"bin/scripts-doctor.js"
+  },
+  "type": "commonjs",
+  "files": ["bin","dist","README.md","LICENSE"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashwani2529/scripts-doctor.git"
+  },
+  "keywords": [
+    "npm-scripts",
+    "cli",
+    "lint",
+    "cross-platform",
+    "windows",
+    "shx",
+    "rimraf",
+    "cross-env",
+    "scripts-doctor"
+  ],
+  "author": "Ashwani Singh",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "picocolors":"^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node":"^24.10.0",
+    "typescript":"^5.9.3"
+  },
+  "engines": {
+    "node":">=18"
+  },
+  "bugs": {
+    "url": "https://github.com/Ashwani2529/scripts-doctor/issues"
+  },
+  "homepage": "https://github.com/Ashwani2529/scripts-doctor#readme"
+}
